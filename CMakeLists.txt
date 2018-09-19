@@ -1,5 +1,5 @@
 #
-# lijinggang@021.com
+# 1394020320@qq.com
 #
 include_directories(${PROJECT_SOURCE_DIR}/config)
 include_directories(${PROJECT_SOURCE_DIR}/components)
