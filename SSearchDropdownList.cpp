@@ -89,7 +89,7 @@ namespace SOUI
             pt.y = rcWnd.top - szDropdown.cy;
         }
         m_pDropDownWnd->SetWindowPos(HWND_TOPMOST,pt.x,pt.y,szDropdown.cx,szDropdown.cy,SWP_SHOWWINDOW|SWP_NOACTIVATE);
-        m_pDropDownWnd->CSimpleWnd::SetCapture();
+        m_pDropDownWnd->SNativeWnd::SetCapture();
     }
 
     SWindow * SSearchDropdownList::GetDropDownOwner()
@@ -161,7 +161,7 @@ namespace SOUI
     BOOL SDropdownList::Create(pugi::xml_node popupStyle)
     {
         HWND hParent = m_pOwner->GetDropDownOwner()->GetContainer()->GetHostHwnd();
-        HWND hWnd=CSimpleWnd::Create(NULL,WS_POPUP,WS_EX_TOPMOST|WS_EX_TOOLWINDOW,0,0,0,0,hParent,0);
+        HWND hWnd=SNativeWnd::Create(NULL,WS_POPUP,WS_EX_TOPMOST|WS_EX_TOOLWINDOW,0,0,0,0,hParent,0);
         if(!hWnd) return FALSE;
         m_pOwner->OnCreateDropDown(this);
         if(popupStyle) 

@@ -18,7 +18,6 @@
 		<file name="cmn.scrollbar" path="imgx\cmn.scrollbar.png" />
 	</imgx>
 	<image>
-		<file name="bg.setting" path="image\bg.setting[1{2,37,2,2}].png" />
 		<file name="cmn.border" path="image\cmn.border[2{2,2}].png" />
 		<file name="sms.help" path="image\sms.help.png" />
 		<file name="sms.record" path="image\sms.record.png" />

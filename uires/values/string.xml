@@ -15,4 +15,5 @@
   <col_sms_loyal_degree value="忠诚度"/>
   <sms_recv_head value="发送给(已选"/>
   <sms_recv_tail value="人):"/>
+  <scale value="放大："/>
 </string>

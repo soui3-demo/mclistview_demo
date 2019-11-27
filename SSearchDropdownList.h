@@ -52,7 +52,7 @@ namespace SOUI
             if(pMsg->message==WM_MOUSEWHEEL 
                 || ((pMsg->message == WM_KEYDOWN || pMsg->message==WM_KEYUP) && (pMsg->wParam == VK_UP || pMsg->wParam==VK_DOWN || pMsg->wParam==VK_RETURN || pMsg->wParam==VK_ESCAPE)))
             {//截获滚轮及上下键消息
-                CSimpleWnd::SendMessage(pMsg->message,pMsg->wParam,pMsg->lParam);
+                SNativeWnd::SendMessage(pMsg->message,pMsg->wParam,pMsg->lParam);
                 return TRUE;    
             }
             return FALSE;

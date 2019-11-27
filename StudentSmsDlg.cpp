@@ -45,8 +45,8 @@ protected:
     struct StudentInfo{
         SStringT strNick;
         UINT     imid;//yy 号
-        SOUI::CTime tm1;
-        SOUI::CTime tm2;
+        SOUI::STime tm1;
+        SOUI::STime tm2;
         int         nLoyalDegree;
         BOOL        bChecked;
     };
@@ -67,20 +67,20 @@ public:
         {
             {
             _T("sb no.1"),100,
-            SOUI::CTime(2015,9,1,0,0,0),
-            SOUI::CTime(2016,9,1,0,0,0),
+            SOUI::STime(2015,9,1,0,0,0),
+            SOUI::STime(2016,9,1,0,0,0),
             10000,0
             },
             {
             _T("sb no.2"),200,
-            SOUI::CTime(2015,9,2,0,0,0),
-            SOUI::CTime(2016,9,2,0,0,0),
+            SOUI::STime(2015,9,2,0,0,0),
+            SOUI::STime(2016,9,2,0,0,0),
             100000,0
             },
             {
             _T("sb no.3"),300,
-            SOUI::CTime(2015,9,3,0,0,0),
-            SOUI::CTime(2016,9,3,0,0,0),
+            SOUI::STime(2015,9,3,0,0,0),
+            SOUI::STime(2016,9,3,0,0,0),
             100000,0
             },
         };
@@ -93,20 +93,20 @@ public:
         {
             {
             _T("nb no.1"),400,
-            SOUI::CTime(2015,9,1,0,0,0),
-            SOUI::CTime(2016,9,1,0,0,0),
+            SOUI::STime(2015,9,1,0,0,0),
+            SOUI::STime(2016,9,1,0,0,0),
             0,0
             },
             {
             _T("nb no.2"),500,
-            SOUI::CTime(2015,9,2,0,0,0),
-            SOUI::CTime(2016,9,2,0,0,0),
+            SOUI::STime(2015,9,2,0,0,0),
+            SOUI::STime(2016,9,2,0,0,0),
             0,0
             },
             {
             _T("nb no.3"),600,
-            SOUI::CTime(2015,9,3,0,0,0),
-            SOUI::CTime(2016,9,3,0,0,0),
+            SOUI::STime(2015,9,3,0,0,0),
+            SOUI::STime(2016,9,3,0,0,0),
             0,0
             },
         };
@@ -381,7 +381,7 @@ class CSmsRecordAdapter : public SAdapterBase
 protected:
     struct RecordInfo
     {
-        SOUI::CTime tmSend;
+        SOUI::STime tmSend;
         SStringT strReceiver;
         SStringT strContent;
     };
@@ -394,27 +394,27 @@ public:
         RecordInfo recs[] =
         {
             {
-            SOUI::CTime(2015,9,1,0,0,0),
+            SOUI::STime(2015,9,1,0,0,0),
             _T("sb no.1"),
             _T("A股明天暴跌，有钱没钱使劲买。"),
             },
             {
-            SOUI::CTime(2015,9,1,0,0,0),
+            SOUI::STime(2015,9,1,0,0,0),
             _T("sb no.2"),
             _T("A股明天暴跌，有钱没钱使劲买。"),
             },
             {
-            SOUI::CTime(2015,9,1,0,0,0),
+            SOUI::STime(2015,9,1,0,0,0),
             _T("sb no.3"),
             _T("A股明天暴跌，有钱没钱使劲买。"),
             },
             {
-            SOUI::CTime(2015,9,1,0,0,0),
+            SOUI::STime(2015,9,1,0,0,0),
             _T("sb no.4"),
             _T("A股明天暴跌，有钱没钱使劲买。"),
             },
             {
-            SOUI::CTime(2015,9,1,0,0,0),
+            SOUI::STime(2015,9,1,0,0,0),
             _T("sb no.5"),
             _T("A股明天暴跌，有钱没钱使劲买。"),
             },
@@ -535,4 +535,29 @@ void CStudentSmsDlg::OnSmsInputNotify(EventArgs *e)
     SWindow *pWordCount = FindChildByID(R.id.txt_wordcount); 
     pWordCount->SetWindowText(SStringT().Format(_T("%d"),nLen));
     pWordCount->EnableWindow(nLen<100,TRUE);
+}
+
+void CStudentSmsDlg::OnScale(int nID)
+{
+	int nScale = 100;
+	switch(nID)
+	{
+	case R.id.scale_100: nScale = 100;break;
+	case R.id.scale_150: nScale = 150;break;
+	case R.id.scale_200: nScale = 200;break;
+	}
+
+	int nCurScale = GetScale();
+	CRect rcWnd = GetWindowRect();
+	int OriWid = rcWnd.Width() * 100 / nCurScale;
+	int OriHei = rcWnd.Height() * 100/ nCurScale;
+
+	int nNewWid = OriWid * nScale / 100;
+	int nNewHei = OriHei * nScale / 100;
+
+	SDispatchMessage(UM_SETSCALE,nScale,0);
+
+	if(!IsZoomed()){
+		SetWindowPos(0, 0, 0, nNewWid, nNewHei, SWP_NOZORDER | SWP_NOMOVE);
+	}
 }

@@ -19,11 +19,13 @@ protected:
     void OnSearchFillList(EventArgs *e);
     void OnSearchValue(EventArgs *e);
     void OnSmsInputNotify(EventArgs *e);
+	void OnScale(int nID);
     EVENT_MAP_BEGIN()
         EVENT_ID_HANDLER(R.id.edit_sms_input,EventRENotify::EventID,OnSmsInputNotify)
         EVENT_ID_COMMAND(R.id.btn_sms_record,OnBtnSmsRecord);
         EVENT_ID_HANDLER(R.id.edit_search,EventFillSearchDropdownList::EventID,OnSearchFillList)
         EVENT_ID_HANDLER(R.id.edit_search,EventDropdownListSelected::EventID,OnSearchValue)
+		EVENT_ID_COMMAND_RANGE(R.id.scale_100,R.id.scale_200,OnScale)
     EVENT_MAP_END()
 protected:
     BOOL OnInitDialog(HWND wndFocus, LPARAM lInitParam);
